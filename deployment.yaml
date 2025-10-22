@@ -19,7 +19,7 @@ spec:
         - name: docker-credentials
       containers:
       - name: scenario-app
-        image: anupme/scenario-2:8
+        image: anupme/scenario-2:9
         ports:
         - containerPort: 5000
           name: http
