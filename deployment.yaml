@@ -21,7 +21,7 @@ spec:
       - name: scenario-app
         image: anupme/scenario-2:8
         ports:
-        - containerPort: 80
+        - containerPort: 5000
           name: http
         resources:
           requests:
@@ -33,12 +33,12 @@ spec:
         livenessProbe:
           httpGet:
             path: /
-            port: 80
+            port: 5000
           initialDelaySeconds: 30
           periodSeconds: 10
         readinessProbe:
           httpGet:
             path: /
-            port: 80
+            port: 5000
           initialDelaySeconds: 5
           periodSeconds: 5
