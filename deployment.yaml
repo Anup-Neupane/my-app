@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scenario-app
+  namespace: demo
+  labels:
+    app: scenario-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: scenario-app
+  template:
+    metadata:
+      labels:
+        app: scenario-app
+    spec:
+      imagePullSecrets:
+        - name: docker-credentials
+      containers:
+      - name: scenario-app
+        image: anupme/scenario-2:4
+        ports:
+        - containerPort: 80
+          name: http
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
